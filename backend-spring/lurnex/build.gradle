@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.lurnex'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Core Dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Spring Security & JWT
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt:0.12.3'  // JWT Token Support
+
+    // PostgreSQL Driver
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Validation (for validating user input)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Lombok (Reduces Boilerplate Code)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Spring Boot DevTools (for Hot Reload)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // WebSockets (for real-time features like chat & notifications)
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+    // Spring Boot Mail (for email notifications)
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    // Actuator (for monitoring & analytics)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Testing (JUnit, Security Test, MockMvc)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
